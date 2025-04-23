@@ -33,19 +33,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
         .menu .logo {
             display: flex;
-            align-items: center; // Align logo and text horizontally
-            gap: 25px; // Further increase spacing between logo and text
+            align-items: center;
+            gap: 25px;
         }
 
         .menu .page-name {
-            font-size: 22px; // Keep increased font size
+            font-size: 22px;
             font-weight: bold;
             color: #333;
-            font-family: 'Cursive', sans-serif; // Apply the specified font style
+            font-family: 'Cursive', sans-serif;
         }
 
         .menu .logo img {
-            height: 50px; // Increase logo size
+            height: 50px;
         }
 
         .menu .menu-toggle {
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .menu-items {
             display: flex;
             gap: 15px;
-            list-style: none; // Ensure no dots appear before menu items
+            list-style: none;
         }
 
         .menu-items a {
@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <a href="index.html">
                     <img src="Logo.png" alt="MK HOME">
                 </a>
-                <span class="page-name">               𝓜𝓚 𝓗𝓞𝓜𝓔  </span>
+                <span class="page-name">𝓜𝓚 𝓗𝓞𝓜𝓔</span>
             </div>
             <div class="menu-toggle">&#9776;</div>
             <ul class="menu-items">
@@ -133,17 +133,6 @@ document.addEventListener("DOMContentLoaded", function () {
     nav.innerHTML = menuHTML;
     document.body.insertBefore(nav, document.body.firstChild);
 
-    // Adjust body padding dynamically based on menu height
-    const menu = document.querySelector(".menu");
-    const adjustBodyPadding = () => {
-        const menuHeight = menu.offsetHeight;
-        document.body.style.paddingTop = `${menuHeight}px`;
-    };
-
-    // Call the function on load and on window resize
-    adjustBodyPadding();
-    window.addEventListener("resize", adjustBodyPadding);
-
     // Toggle menu visibility on mobile
     const menuToggle = document.querySelector(".menu-toggle");
     const menuItems = document.querySelector(".menu-items");
@@ -151,7 +140,7 @@ document.addEventListener("DOMContentLoaded", function () {
         menuItems.classList.toggle("active");
     });
 
-    // Add event listeners for specific links (similar to menu.js)
+    // Add event listeners for specific links
     document.getElementById("dutoan-link").addEventListener("click", function (event) {
         event.preventDefault();
         const width = 1000;
@@ -200,42 +189,16 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
+    // Add event listener for "Góp Ý" menu item to open in a popup
     document.querySelector('a[href="#fb-comments"]').addEventListener("click", function (event) {
         event.preventDefault();
-
-        // Scroll to the Facebook comments section
-        const fbCommentsSection = document.querySelector(".fb-comments-container");
-        if (fbCommentsSection) {
-            fbCommentsSection.scrollIntoView({ behavior: "smooth" });
-        } else {
-            console.warn("Phần Góp Ý không tồn tại trên trang!");
-        }
-
-        // Open the Facebook comments page in a popup
-        const width = 500;
-        const height = 1000;
+        const width = 800;
+        const height = 600;
         const left = (window.screen.width - width) / 2;
         const top = (window.screen.height - height) / 2;
         const popup = window.open(
             "fb-comments.html",
             "fbCommentsPopup",
-            `width=${width},height=${height},top=${top},left=${left},scrollbars=yes,resizable=yes`
-        );
-        if (!popup) {
-            alert("Popup bị chặn! Vui lòng cho phép popup trong trình duyệt.");
-        }
-    });
-
-    // Add event listener for "Phần Mềm" menu item to open in a popup
-    document.querySelector('.menu-items a[href="phanmem.html"]').addEventListener("click", function (event) {
-        event.preventDefault();
-        const width = 1200;
-        const height = 800;
-        const left = (window.screen.width - width) / 2;
-        const top = (window.screen.height - height) / 2;
-        const popup = window.open(
-            "phanmem.html",
-            "phanmemPopup",
             `width=${width},height=${height},top=${top},left=${left},scrollbars=yes,resizable=yes`
         );
         if (!popup) {

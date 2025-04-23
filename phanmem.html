@@ -20,6 +20,11 @@
             const links = document.querySelectorAll('a[href]');
             links.forEach(link => {
                 link.addEventListener("click", function (event) {
+                    // Prevent popup for homepage link
+                    if (link.href.includes("index.html")) {
+                        return;
+                    }
+
                     event.preventDefault();
                     const width = 1200;
                     const height = 800;
@@ -46,7 +51,7 @@
             <ul style="list-style: none; padding: 0; text-align: center;">
                 <li><a href="PhanMem/AutoCAD/autocad.html" target="_blank" style="color: #1db954; text-decoration: none;">AutoDesk AutoCAD 2007 -2025</a></li>
                 <li><a href="PhanMem/HUONGDANCAICAD/Huongdancaiautocad2025.HTML" target="_blank" style="color: #1db954; text-decoration: none;">Hướng Dẫn Cài AutoCAD 2025</a></li>
-                <li><a href="PhanMem/AutoCAD Mechanical/autocad.html" target="_blank" style="color: #1db954; text-decoration: none;">Autodesk AutoCAD Mechanical</a></li>
+                <li><a href="PhanMem/AutoCAD Mechanical/autocadm.html" target="_blank" style="color: #1db954; text-decoration: none;">Autodesk AutoCAD Mechanical</a></li>
                 <li><a href="PhanMem/Revit/revit.html" target="_blank" style="color: #1db954; text-decoration: none;">AutoDesk Revit 2014 -2024</a></li>
                 <li><a href="PhanMem/HUONGDANCAIREVIT/Huongdancairevit2025.HTML" target="_blank" style="color: #1db954; text-decoration: none;">Hướng Dẫn Cài Autodesk Revit 2024</a></li>
                 <li><a href="PhanMem/CSI/SAP2000.html" target="_blank" style="color: #1db954; text-decoration: none;">CSI SAP 2000 V24</a></li>
