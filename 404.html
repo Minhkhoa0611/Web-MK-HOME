@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bảo trì - Trang đang được nâng cấp</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      padding: 0 20px;
+      overflow: hidden;
+    }
+
+    .container {
+      max-width: 700px;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    h1 {
+      font-size: 8rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      background: linear-gradient(90deg, #ff6b6b, #f9d423, #4fc3f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientMove 3s infinite;
+    }
+
+    .message {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      opacity: 0.9;
+    }
+
+    .suggestions {
+      list-style: none;
+      text-align: left;
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+    }
+
+    .suggestions li {
+      margin: 10px 0;
+    }
+
+    .link {
+      color: #4fc3f7;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    .link:hover {
+      color: #ff6b6b;
+    }
+
+    .promise {
+      font-size: 1rem;
+      margin-bottom: 30px;
+      opacity: 0.8;
+    }
+
+    .btn {
+      display: inline-block;
+      background: linear-gradient(90deg, #ff6b6b, #f9d423);
+      color: #fff;
+      padding: 14px 28px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.2rem;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 id="maintenance-title">Bảo trì</h1>
+    <p class="message">Xin lỗi, trang web của chúng tôi hiện đang được nâng cấp để phục vụ bạn tốt hơn.</p>
+    <ul class="suggestions">
+      <li>Quay lại sau vài giờ để tiếp tục truy cập.</li>
+      <li>Liên hệ với chúng tôi qua email: <a href="mailto:mkcons.az@gmail.com" class="link">mkcons.az@gmail.com</a> nếu cần hỗ trợ ngay lập tức.</li>
+    </ul>
+    <p class="promise">
+      Chúng tôi đang nỗ lực hoàn thành bảo trì trong thời gian sớm nhất. Cảm ơn bạn đã thông cảm!
+    </p>
+    <a href="/" class="btn">Quay về Trang chủ</a>
+  </div>
+
+  <script>
+    function getRandomColor() {
+      const letters = '0123456789ABCDEF';
+      let color = '#';
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+
+    function changeColor() {
+      const maintenanceTitle = document.getElementById('maintenance-title');
+      maintenanceTitle.style.color = getRandomColor();
+    }
+
+    // Thay đổi màu sắc chữ "Bảo trì" mỗi 1 giây
+    setInterval(changeColor, 1000);
+  </script>
+</body>
+</html>
