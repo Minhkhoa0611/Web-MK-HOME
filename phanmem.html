@@ -15,33 +15,6 @@
     </script>
     <script src="menu.js"></script>
     <link rel="stylesheet" href="phanmem.css">
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const links = document.querySelectorAll('a[href]');
-            links.forEach(link => {
-                link.addEventListener("click", function (event) {
-                    // Prevent popup for homepage link
-                    if (link.href.includes("index.html")) {
-                        return;
-                    }
-
-                    event.preventDefault();
-                    const width = 1200;
-                    const height = 800;
-                    const left = (window.screen.width - width) / 2;
-                    const top = (window.screen.height - height) / 2;
-                    const popup = window.open(
-                        link.href,
-                        "popupWindow",
-                        `width=${width},height=${height},top=${top},left=${left},scrollbars=yes,resizable=yes`
-                    );
-                    if (!popup) {
-                        alert("Popup bị chặn! Vui lòng cho phép popup trong trình duyệt.");
-                    }
-                });
-            });
-        });
-    </script>
 </head>
 <body style="background-color: #f5f5dc; color: #333; font-family: 'Roboto', sans-serif; margin: 0; padding: 0; margin-top: 20px;">
     <section id="software" style="padding: 20px;">
