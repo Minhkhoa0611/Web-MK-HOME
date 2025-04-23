@@ -27,6 +27,10 @@ document.addEventListener("DOMContentLoaded", function () {
             box-shadow: none;
         }
 
+        body {
+            padding-top: 80px; /* Adjust padding to account for the menu and 2cm margin */
+        }
+
         .menu .logo {
             display: flex;
             align-items: center; // Align logo and text horizontally
@@ -102,17 +106,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 <a href="index.html">
                     <img src="Logo.png" alt="MK HOME">
                 </a>
-                <span class="page-name">     𝓜𝓚 𝓗𝓞𝓜𝓔  </span>
+                <span class="page-name">               𝓜𝓚 𝓗𝓞𝓜𝓔  </span>
             </div>
             <div class="menu-toggle">&#9776;</div>
             <ul class="menu-items">
                 <li><a href="index.html"><i class="fas fa-home"></i> Trang Chủ</a></li>
                 <li><a href="dichvu.html" target="_blank"><i class="fas fa-tools"></i> Dịch Vụ</a></li>
+                <li><a href="#baogia"><i class="fas fa-file-invoice-dollar"></i> Báo Giá</a></li>
+                <li><a href="#contact-form"><i class="fas fa-envelope"></i> Liên Hệ</a></li>
                 <li><a href="phanmem.html" target="_blank"><i class="fas fa-laptop-code"></i> Phần Mềm</a></li>
                 <li><a href="#" id="dutoan-link"><i class="fas fa-calculator"></i> Dự Toán Nhanh</a></li>
-                <li><a href="#baogia"><i class="fas fa-file-invoice-dollar"></i> Báo Giá</a></li>
                 <li><a href="Profile/Profile.html" target="_blank" id="profile-link"><i class="fas fa-user"></i> Profile</a></li>
-                <li><a href="#contact-form"><i class="fas fa-envelope"></i> Liên Hệ</a></li>
                 <li><a href="#fb-comments"><i class="fas fa-comment-dots"></i> Góp Ý</a></li>
                 <li><a href="#" id="thanhtoan-link"><i class="fas fa-credit-card"></i> Thanh Toán</a></li>
             </ul>
@@ -128,6 +132,17 @@ document.addEventListener("DOMContentLoaded", function () {
     const nav = document.createElement('nav');
     nav.innerHTML = menuHTML;
     document.body.insertBefore(nav, document.body.firstChild);
+
+    // Adjust body padding dynamically based on menu height
+    const menu = document.querySelector(".menu");
+    const adjustBodyPadding = () => {
+        const menuHeight = menu.offsetHeight;
+        document.body.style.paddingTop = `${menuHeight}px`;
+    };
+
+    // Call the function on load and on window resize
+    adjustBodyPadding();
+    window.addEventListener("resize", adjustBodyPadding);
 
     // Toggle menu visibility on mobile
     const menuToggle = document.querySelector(".menu-toggle");
@@ -187,11 +202,44 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.querySelector('a[href="#fb-comments"]').addEventListener("click", function (event) {
         event.preventDefault();
+
+        // Scroll to the Facebook comments section
         const fbCommentsSection = document.querySelector(".fb-comments-container");
         if (fbCommentsSection) {
-            fbCommentsSection.scrollIntoView({ behavior: "smooth" }); // Smooth scroll to the section
+            fbCommentsSection.scrollIntoView({ behavior: "smooth" });
         } else {
-            alert("Phần Góp Ý không tồn tại trên trang!");
+            console.warn("Phần Góp Ý không tồn tại trên trang!");
+        }
+
+        // Open the Facebook comments page in a popup
+        const width = 500;
+        const height = 1000;
+        const left = (window.screen.width - width) / 2;
+        const top = (window.screen.height - height) / 2;
+        const popup = window.open(
+            "fb-comments.html",
+            "fbCommentsPopup",
+            `width=${width},height=${height},top=${top},left=${left},scrollbars=yes,resizable=yes`
+        );
+        if (!popup) {
+            alert("Popup bị chặn! Vui lòng cho phép popup trong trình duyệt.");
+        }
+    });
+
+    // Add event listener for "Phần Mềm" menu item to open in a popup
+    document.querySelector('.menu-items a[href="phanmem.html"]').addEventListener("click", function (event) {
+        event.preventDefault();
+        const width = 1200;
+        const height = 800;
+        const left = (window.screen.width - width) / 2;
+        const top = (window.screen.height - height) / 2;
+        const popup = window.open(
+            "phanmem.html",
+            "phanmemPopup",
+            `width=${width},height=${height},top=${top},left=${left},scrollbars=yes,resizable=yes`
+        );
+        if (!popup) {
+            alert("Popup bị chặn! Vui lòng cho phép popup trong trình duyệt.");
         }
     });
 });

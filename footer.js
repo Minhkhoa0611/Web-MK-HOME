@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
       align-items: flex-start; /* Align items to the top */
       gap: 20px;
       max-width: 1200px;
-      margin: 0 auto;
+      margin: 0 auto 0 10px; /* Add left margin to shift the footer slightly to the left */
       padding: 0;
       border: none; /* Remove border */
     }
@@ -77,6 +77,9 @@ document.addEventListener("DOMContentLoaded", function () {
       transform: scale(1.2);
       color: #0056b3; /* Blue on hover */
     }
+    .footer-section iframe {
+      margin-left: 30px; /* Increase left margin to shift the iframe entirely to the left */
+    }
     .map-container iframe {
       width: 100%;
       max-width: 350px; /* Increased max width */
@@ -84,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
       border: none;
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
-      margin-right: 10px; /* Slight margin to the right */
+      margin-left: 30px; /* Increase left margin for the map */
     }
     .footer-bottom {
       text-align: center;
@@ -95,9 +98,17 @@ document.addEventListener("DOMContentLoaded", function () {
     .footer-bottom a {
       color: #0056b3; /* Blue links */
       text-decoration: none;
+      transition: color 0.3s ease;
     }
     .footer-bottom a:hover {
       text-decoration: underline;
+      color: #003d80; /* Darker blue on hover */
+    }
+    .back-to-top {
+      display: block;
+      margin-top: 10px;
+      font-size: 14px;
+      font-weight: bold;
     }
     @media (max-width: 768px) {
       .footer-container {
@@ -109,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
         margin-bottom: 20px; /* Add spacing between sections */
       }
       .footer-section.map-container iframe {
-        margin-right: 0; /* Remove right margin for map */
+        margin-left: 0; /* Remove left margin for map on smaller screens */
       }
       .social-icons {
         justify-content: center; /* Center social icons */
@@ -144,7 +155,10 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="footer-section">
           <h3>Liên hệ chúng tôi</h3>
           <ul>
-            <li><i class="fas fa-envelope"></i>Email: <a href="mailto:mkcons.az@gmail.com"><strong>mkcons.az@gmail.com</strong></a></li>
+            <li><i class="fas fa-envelope"></i>Email: 
+                <a href="mailto:mkcons.az@gmail.com"><strong>mkcons.az@gmail.com</strong></a> | 
+                <a href="mailto:mkhome.az@gmail.com"><strong>mkhome.az@gmail.com</strong></a>
+            </li>
             <li><i class="fas fa-phone"></i>Hotline: <a href="tel:0867544809"><strong>0867544809</strong></a> | <a href="tel:0825864379"><strong>0825864379</strong></a></li>
             <li><i class="fas fa-map-marker-alt"></i>Địa chỉ: <strong>Ninh Bình, Ninh Hòa, Khánh Hòa, Việt Nam</strong></li>
           </ul>
@@ -180,6 +194,7 @@ document.addEventListener("DOMContentLoaded", function () {
       </div>
       <div class="footer-bottom">
         <p>&copy; 2025 Xây Dựng Minh Khoa. All rights reserved. | Designed by <a href="Mktech.html" target="_blank">MK Tech</a></p>
+        <a href="#top" class="back-to-top">Quay Lại Đầu Trang</a>
       </div>
     </footer>
     `;
