@@ -26,39 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     </div>
                 </div>
             </section>
-
-            <section class="process" style="padding: 50px 20px; background: linear-gradient(to bottom, #ffffff, #f1f8e9);">
-                <div class="container" style="max-width: 1200px; margin: 0 auto;">
-                    <h2 class="section-title" style="font-size: 36px; font-weight: bold; margin-bottom: 20px; text-align: center; color: #2e7d32; text-shadow: 1px 1px 3px rgba(46, 125, 50, 0.3);">Quy Trình Làm Việc</h2>
-                    
-                    <div class="steps-title">Quy Trình Thiết Kế</div>
-                    <div class="steps" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-                        ${generateSteps([
-                            "Tiếp nhận thông tin và yêu cầu của khách hàng",
-                            "Tư vấn báo giá gói thiết kế và dự trù gói thi công",
-                            "Khảo sát địa hình và tư vấn chi tiết, ký hợp đồng thiết kế",
-                            "Triển khai mặt bằng công năng theo yêu cầu của khách hàng",
-                            "Thiết kế 3D kiến trúc công trình",
-                            "Triển khai hồ sơ xin phép và hồ sơ thi công công trình",
-                            "Thiết kế 3D nội thất công trình và triển khai hồ sơ chi tiết nội thất",
-                            "Bàn giao hồ sơ toàn bộ công trình tới tay khách hàng"
-                        ])}
-                    </div>
-                    <div class="process-connector">Quy Trình Thi Công</div>
-                    <div class="steps" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-                        ${generateSteps([
-                            "Chuẩn bị mặt bằng và vật liệu thi công",
-                            "Thi công phần móng và kết cấu chính",
-                            "Thi công phần thô (xây, trát, lắp đặt hệ thống điện nước)",
-                            "Thi công hoàn thiện (ốp lát, sơn, lắp đặt nội thất)",
-                            "Kiểm tra chất lượng và nghiệm thu công trình",
-                            "Bàn giao công trình cho khách hàng",
-                            "Hỗ trợ bảo trì sau bàn giao",
-                            "Đánh giá và thu thập phản hồi từ khách hàng"
-                        ])}
-                    </div>
-                </div>
-            </section>
         </main>
     `;
 
@@ -310,6 +277,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return descriptions
             .map(
                 (desc, index) => `
+
                 <div class="step" style="background: #f9f9f9; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: transform 0.3s, box-shadow 0.3s;">
                     <h3 class="step-number" style="font-size: 28px; font-weight: bold; color: #388e3c; margin-bottom: 10px;">${String(index + 1).padStart(2, "0")}</h3>
                     <p class="step-description" style="font-size: 16px; text-align: left;">${desc}</p>

@@ -189,6 +189,23 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
+    // Add event listener for "Báo Giá" menu item to open in a popup
+    document.querySelector('a[href="#baogia"]').addEventListener("click", function (event) {
+        event.preventDefault();
+        const width = 1000;
+        const height = 700;
+        const left = (window.screen.width - width) / 2;
+        const top = (window.screen.height - height) / 2;
+        const popup = window.open(
+            "pricing.html",
+            "pricingPopup",
+            `width=${width},height=${height},top=${top},left=${left},scrollbars=yes,resizable=yes`
+        );
+        if (!popup) {
+            alert("Popup bị chặn! Vui lòng cho phép popup trong trình duyệt.");
+        }
+    });
+
     // Add event listener for "Góp Ý" menu item to open in a popup
     document.querySelector('a[href="#fb-comments"]').addEventListener("click", function (event) {
         event.preventDefault();

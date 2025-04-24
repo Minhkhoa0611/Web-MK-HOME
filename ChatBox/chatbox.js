@@ -12,7 +12,27 @@ const chatbotData = {
     "Chi phí xây dựng nhà là bao nhiêu?": "Chi phí xây dựng phụ thuộc vào diện tích, thiết kế và vật liệu. Hãy liên hệ để được báo giá chi tiết.",
     "Thời gian hoàn thành một dự án là bao lâu?": "Thời gian hoàn thành phụ thuộc vào quy mô và yêu cầu của dự án. Thông thường từ 3-6 tháng.",
     "MK Home có hỗ trợ thiết kế nội thất không?": "Có, chúng tôi cung cấp dịch vụ thiết kế nội thất chuyên nghiệp, phù hợp với nhu cầu của khách hàng.",
-    "Vật liệu xây dựng nào tốt nhất?": "Vật liệu xây dựng tốt nhất phụ thuộc vào ngân sách và yêu cầu của bạn. Chúng tôi sẽ tư vấn vật liệu phù hợp nhất."
+    "Vật liệu xây dựng nào tốt nhất?": "Vật liệu xây dựng tốt nhất phụ thuộc vào ngân sách và yêu cầu của bạn. Chúng tôi sẽ tư vấn vật liệu phù hợp nhất.",
+    "Báo Giá Công Ty": `BÁO GIÁ DỊCH VỤ TƯ VẤN GIÁM SÁT - THIẾT KẾ THI CÔNG MK HOME
+📋 Dịch vụ Giám Sát
+Gói dịch vụ\tThời gian giám sát\tThời gian (h)/Ngày\tNhà phố\tBiệt thự
+Gói tiêu chuẩn\t3 buổi/tuần\t3 – 4 giờ\t8.000.000đ\t10.000.000đ
+Tư vấn Giám Sát bán thời gian\t5 buổi/tuần\t3 – 4 giờ\t12.000.000đ\t14.000.000đ
+Tư vấn Giám Sát nguyên ngày\tThứ 2 – Thứ 7\t7 – 8 giờ\t18.000.000đ\t22.000.000đ
+
+📐 Đơn Giá Thiết Kế
+Loại Thiết Kế\tGiá (đ/m²)\tBao Gồm
+Thiết kế cơ bản\t60.000\tKiến Trúc, Kết Cấu
+Thiết kế tiêu chuẩn\t90.000\tKiến Trúc, Kết Cấu, Điện Nước
+Thiết kế cao cấp\t140.000\tKiến Trúc, Kết Cấu, Điện Nước, Nội Thất
+Thiết kế 3D phối cảnh\t180.000\tKiến Trúc, Kết Cấu, Điện Nước, Nội Thất, 3D Phối Cảnh
+
+📐 Dịch vụ Thi Công
+Dịch vụ\tNhà phố\tBiệt thự
+Đơn giá thi công trọn gói (Không bao gồm Nội thất rời)\t6.000.000đ/m²\t6.000.000đ/m²
+Đơn giá thi công Nhân Công (Không bao gồm Vật Tư)\t2.500.000đ/m²\t2.500.000đ/m²
+
+Lưu ý: Đơn giá trên chỉ là tham khảo. Có thể thỏa thuận, vui lòng liên hệ: 0867544809`
 };
 
 // Thư mục chứa ảnh
@@ -160,7 +180,41 @@ function filterSensitiveWords(message) {
     return filteredMessage;
 }
 
-// Thêm tin nhắn vào giao diện (có lọc từ nhạy cảm)
+// Load chat logs from localStorage on page load
+function loadChatLogs() {
+    const chatLogs = JSON.parse(localStorage.getItem("chatLogs")) || [];
+    chatLogs.forEach(log => {
+        const isBot = log.includes("Bot:");
+        const message = log.split("]: ")[1]; // Extract the message content
+        if (message) {
+            const messageElement = document.createElement("div");
+            messageElement.classList.add("chat-message", isBot ? "bot" : "user");
+
+            if (isBot) {
+                messageElement.style.backgroundColor = "#e6f7ff";
+                messageElement.style.color = "#005b96";
+                messageElement.style.borderRadius = "10px";
+                messageElement.style.padding = "10px";
+                messageElement.style.margin = "5px 0";
+                messageElement.style.boxShadow = "0 2px 5px rgba(0, 0, 0, 0.1)";
+            } else {
+                messageElement.style.backgroundColor = "#007bff";
+                messageElement.style.color = "#ffffff";
+                messageElement.style.borderRadius = "10px";
+                messageElement.style.padding = "10px";
+                messageElement.style.margin = "5px 0";
+                messageElement.style.boxShadow = "0 2px 5px rgba(0, 0, 0, 0.1)";
+                messageElement.style.alignSelf = "flex-end";
+            }
+
+            messageElement.textContent = message;
+            chatBody.appendChild(messageElement);
+        }
+    });
+    scrollToBottom();
+}
+
+// Update addMessage to save messages locally and display them
 function addMessage(message, isBot = false) {
     const filteredMessage = filterSensitiveWords(message); // Lọc từ nhạy cảm
     const messageElement = document.createElement("div");
@@ -186,114 +240,38 @@ function addMessage(message, isBot = false) {
     messageElement.textContent = filteredMessage;
     chatBody.appendChild(messageElement);
     scrollToBottom();
+
+    // Save the message to localStorage
+    saveChatLogToLocal(filteredMessage, isBot);
 }
 
-// Thêm hình ảnh vào giao diện
-function addImageMessage(galleries) {
-    Object.values(galleries).forEach(gallery => {
-        const galleryContainer = document.createElement("div");
-        galleryContainer.classList.add("gallery-container");
-        galleryContainer.style.backgroundColor = "#ffffff"; // Nền trắng
-        galleryContainer.style.padding = "10px"; // Thêm khoảng cách bên trong
-        galleryContainer.style.borderRadius = "8px"; // Bo góc
-        galleryContainer.style.margin = "10px 0"; // Khoảng cách giữa các khung
-        galleryContainer.style.boxShadow = "0 2px 5px rgba(0, 0, 0, 0.1)"; // Đổ bóng
+// Save chat logs to localStorage
+function saveChatLogToLocal(message, isBot = false) {
+    const timestamp = new Date().toISOString();
+    const role = isBot ? "Bot" : "User";
+    const logMessage = `[${timestamp}] ${role}: ${message}`;
 
-        // Thêm tiêu đề của gallery
-        const titleElement = document.createElement("h3");
-        titleElement.textContent = gallery.title;
-        titleElement.classList.add("gallery-title");
-        titleElement.style.marginBottom = "10px"; // Khoảng cách dưới tiêu đề
-        titleElement.style.color = "#000000"; // Màu đen
-        titleElement.style.fontWeight = "bold"; // In đậm
-        galleryContainer.appendChild(titleElement);
+    const chatLogs = JSON.parse(localStorage.getItem("chatLogs")) || [];
+    chatLogs.push(logMessage);
+    localStorage.setItem("chatLogs", JSON.stringify(chatLogs));
+}
 
-        // Thêm ảnh đại diện
-        const imgElement = document.createElement("img");
-        imgElement.src = folder + gallery.images[0]; // Ảnh đầu tiên làm đại diện
-        imgElement.classList.add("chat-image");
-        imgElement.style.width = "150px"; // Giảm kích thước ảnh
-        imgElement.style.height = "auto"; // Giữ tỉ lệ ảnh
-        imgElement.style.borderRadius = "5px"; // Bo góc ảnh
-        imgElement.style.boxShadow = "0 1px 3px rgba(0, 0, 0, 0.2)"; // Đổ bóng ảnh
-        imgElement.style.cursor = "pointer"; // Con trỏ dạng click
-        imgElement.onclick = () => openGalleryPopup(gallery); // Mở popup khi nhấn vào ảnh
-        galleryContainer.appendChild(imgElement);
+// Load chat logs when the page loads
+window.addEventListener("load", () => {
+    loadChatLogs(); // Load chat history from localStorage
+    console.info("Chat logs loaded.");
+});
 
-        chatBody.appendChild(galleryContainer); // Thêm từng khung gallery vào chat body
+// Ensure chat logs are saved before the page unloads
+window.addEventListener("beforeunload", () => {
+    const chatLogs = Array.from(chatBody.children).map(messageElement => {
+        const isBot = messageElement.classList.contains("bot");
+        const role = isBot ? "Bot" : "User";
+        const message = messageElement.textContent;
+        return `[${new Date().toISOString()}] ${role}: ${message}`;
     });
-
-    scrollToBottom();
-}
-
-// Mở popup hiển thị tất cả ảnh trong gallery
-function openGalleryPopup(gallery) {
-    // Tạo overlay
-    const overlay = document.createElement("div");
-    overlay.classList.add("popup-overlay");
-    overlay.style.position = "fixed";
-    overlay.style.top = "0";
-    overlay.style.left = "0";
-    overlay.style.width = "100%";
-    overlay.style.height = "100%";
-    overlay.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
-    overlay.style.zIndex = "1000";
-    overlay.style.display = "flex";
-    overlay.style.justifyContent = "center";
-    overlay.style.alignItems = "center";
-
-    // Tạo container cho popup
-    const popupContainer = document.createElement("div");
-    popupContainer.classList.add("popup-container");
-    popupContainer.style.backgroundColor = "#ffffff";
-    popupContainer.style.padding = "20px";
-    popupContainer.style.borderRadius = "8px";
-    popupContainer.style.maxWidth = "80%";
-    popupContainer.style.maxHeight = "80%";
-    popupContainer.style.overflowY = "auto";
-
-    // Thêm tiêu đề của gallery
-    const titleElement = document.createElement("h3");
-    titleElement.textContent = gallery.title;
-    titleElement.style.marginBottom = "10px";
-    titleElement.style.color = "#000000";
-    titleElement.style.fontWeight = "bold";
-    popupContainer.appendChild(titleElement);
-
-    // Thêm các ảnh trong gallery
-    const imagesWrapper = document.createElement("div");
-    imagesWrapper.style.display = "flex";
-    imagesWrapper.style.flexWrap = "wrap";
-    imagesWrapper.style.gap = "10px";
-
-    gallery.images.forEach(img => {
-        const imgElement = document.createElement("img");
-        imgElement.src = folder + img;
-        imgElement.style.width = "150px";
-        imgElement.style.height = "auto";
-        imgElement.style.borderRadius = "5px";
-        imgElement.style.boxShadow = "0 1px 3px rgba(0, 0, 0, 0.2)";
-        imagesWrapper.appendChild(imgElement);
-    });
-
-    popupContainer.appendChild(imagesWrapper);
-
-    // Thêm nút đóng popup
-    const closeButton = document.createElement("button");
-    closeButton.textContent = "Đóng";
-    closeButton.style.marginTop = "20px";
-    closeButton.style.padding = "10px 20px";
-    closeButton.style.backgroundColor = "#ff4d4d";
-    closeButton.style.color = "#ffffff";
-    closeButton.style.border = "none";
-    closeButton.style.borderRadius = "5px";
-    closeButton.style.cursor = "pointer";
-    closeButton.onclick = () => document.body.removeChild(overlay); // Đóng popup
-    popupContainer.appendChild(closeButton);
-
-    overlay.appendChild(popupContainer);
-    document.body.appendChild(overlay);
-}
+    localStorage.setItem("chatLogs", JSON.stringify(chatLogs));
+});
 
 // Cuộn xuống cuối cùng
 function scrollToBottom() {
@@ -471,13 +449,71 @@ function checkAdvisorResponse() {
         });
 }
 
-// Gửi tin nhắn
+// Thêm nội dung nhúng trang báo giá
+function addPricingEmbed() {
+    const iframeContainer = document.createElement("div");
+    iframeContainer.style.margin = "10px 0";
+    iframeContainer.style.border = "1px solid #ddd";
+    iframeContainer.style.borderRadius = "8px";
+    iframeContainer.style.overflow = "hidden";
+    iframeContainer.style.boxShadow = "0 2px 5px rgba(0, 0, 0, 0.1)";
+
+    const iframe = document.createElement("iframe");
+    iframe.src = "../pricing.html"; // Đường dẫn đến trang báo giá
+    iframe.style.width = "100%";
+    iframe.style.height = "500px";
+    iframe.style.border = "none";
+
+    iframeContainer.appendChild(iframe);
+    chatBody.appendChild(iframeContainer);
+    scrollToBottom();
+}
+
+async function fetchPricingContent() {
+    try {
+        const response = await fetch("../pricing.txt");
+        if (response.ok) {
+            return await response.text();
+        } else {
+            console.error("Failed to fetch pricing content:", response.statusText);
+            return "Không thể tải nội dung báo giá. Vui lòng thử lại sau.";
+        }
+    } catch (error) {
+        console.error("Error fetching pricing content:", error);
+        return "Không thể tải nội dung báo giá. Vui lòng thử lại sau.";
+    }
+}
+
 async function sendMessage() {
     const userMessage = userInput.value.trim();
     if (!userMessage) return;
 
     addMessage(userMessage); // Hiển thị tin nhắn người dùng
     suggestionsContainer.innerHTML = ''; // Xóa hoàn toàn gợi ý sau khi gửi
+
+    if (userMessage === "Báo Giá Công Ty") {
+        setTimeout(() => {
+            const pricingLink = "https://www.xaydungminhkhoa.online/pricing.html";
+            const messageElement = document.createElement("div");
+            messageElement.classList.add("chat-message", "bot");
+            messageElement.style.backgroundColor = "#e6f7ff";
+            messageElement.style.color = "#005b96";
+            messageElement.style.borderRadius = "10px";
+            messageElement.style.padding = "10px";
+            messageElement.style.margin = "5px 0";
+            messageElement.style.boxShadow = "0 2px 5px rgba(0, 0, 0, 0.1)";
+            messageElement.innerHTML = `
+                Vui lòng xem bảng báo giá tại đây: 
+                <a href="${pricingLink}" target="_blank" style="color: #007bff; text-decoration: underline;">www.xaydungminhkhoa.online/pricing.html</a>
+                <br>
+                <button style="margin-top: 10px; padding: 10px 20px; background-color: #007bff; color: #ffffff; border: none; border-radius: 5px; cursor: pointer;" onclick="window.open('${pricingLink}', '_blank')">Mở Báo Giá</button>
+            `;
+            chatBody.appendChild(messageElement);
+            scrollToBottom();
+        }, 500);
+        userInput.value = ""; // Xóa ô nhập
+        return;
+    }
 
     if (userMessage === "Tôi cần gập tư vấn viên") {
         if (!isConnectedToTelegram) {

@@ -44,7 +44,7 @@
             <input type="number" id="width" required>
 
             <label for="floors">Số tầng:</label>
-            <input type="number" id="floors" required>
+            <input type="number" id="floors" required> <!-- Xóa giới hạn min và max -->
 
             <label for="roof">Loại mái:</label>
             <select id="roof" required>
@@ -61,6 +61,10 @@
             </select>
 
             <button type="button" id="calculateBtn">Tính Chi Phí</button>
+            <div id="progressContainer" style="display: none; margin-top: 10px;">
+                <label for="progressBar">Đang tính toán...</label>
+                <progress id="progressBar" value="0" max="100" style="width: 100%;"></progress>
+            </div>
         </form>
         <div id="result">
             <h2>Kết Quả</h2>
