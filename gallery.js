@@ -1,5 +1,16 @@
 // Danh sách ảnh theo nhóm
-const galleries = {
+const galleriesNhaPho = {
+    "galleryNhaPho3T": {
+        title: "Thiết Kế Nhà Phố 3 Tầng",
+        images: [
+            "MauTK/Thiết Kế Nhà Phố 3 Tầng/Nhà Phố 3T (1).png",
+            "MauTK/Thiết Kế Nhà Phố 3 Tầng/Nhà Phố 3T (2).png",
+            "MauTK/Thiết Kế Nhà Phố 3 Tầng/Nhà Phố 3T (3).png",
+            "MauTK/Thiết Kế Nhà Phố 3 Tầng/Nhà Phố 3T (4).png",
+            "MauTK/Thiết Kế Nhà Phố 3 Tầng/Nhà Phố 3T (5).png",
+            "MauTK/Thiết Kế Nhà Phố 3 Tầng/Nhà Phố 3T (6).png"
+        ]
+    },
     "galleryNhadep2T": {
         title: "Thiết Kế Nhà Phố 2 Tầng 2025",
         images: [
@@ -12,18 +23,28 @@ const galleries = {
             "MauTK/Thiết Kế Nhà Phố 2 Tầng 2025/Thiết Kế Nhà Phố 2 Tầng 2025 7.png"
         ]
     },
-    "galleryNhadep": {
-        title: "Thiết Kế Nhà Hộp Đẹp Xinh 2025",
+    "galleryNha2Txinh": {
+        title: "Thiết Kế Nhà Phố 2 Tầng Xinh",
         images: [
-            "MauTK/Thiết Kế Nhà Hộp Đẹp Xinh 2025/Thiết Kế Nhà Hộp Đẹp Xinh 2025 1.png",
-            "MauTK/Thiết Kế Nhà Hộp Đẹp Xinh 2025/Thiết Kế Nhà Hộp Đẹp Xinh 2025 2.png",
-            "MauTK/Thiết Kế Nhà Hộp Đẹp Xinh 2025/Thiết Kế Nhà Hộp Đẹp Xinh 2025 3.png",
-            "MauTK/Thiết Kế Nhà Hộp Đẹp Xinh 2025/Thiết Kế Nhà Hộp Đẹp Xinh 2025 4.png",
-            "MauTK/Thiết Kế Nhà Hộp Đẹp Xinh 2025/Thiết Kế Nhà Hộp Đẹp Xinh 2025 5.png",
-            "MauTK/Thiết Kế Nhà Hộp Đẹp Xinh 2025/Thiết Kế Nhà Hộp Đẹp Xinh 2025 6.png",
-            "MauTK/Thiết Kế Nhà Hộp Đẹp Xinh 2025/Thiết Kế Nhà Hộp Đẹp Xinh 2025 7.png"
+            "MauTK/Thiết Kế Nhà Phố Xinh 2025/Nhà Phố 2T (1).png",
+            "MauTK/Thiết Kế Nhà Phố Xinh 2025/Nhà Phố 2T (2).png",
+            "MauTK/Thiết Kế Nhà Phố Xinh 2025/Nhà Phố 2T (3).png",
+            "MauTK/Thiết Kế Nhà Phố Xinh 2025/Nhà Phố 2T (4).png"
         ]
     },
+    "galleryNhaMaiLech": {
+        title: "Thiết Kế Mẫu Nhà Mái Lệch Cấp 4",
+        images: [
+            "MauTK/Thiết Kế Mẫu Nhà Mái Lệch Cấp 4/Nhà Mái Lệch (1).png",
+            "MauTK/Thiết Kế Mẫu Nhà Mái Lệch Cấp 4/Nhà Mái Lệch (2).png",
+            "MauTK/Thiết Kế Mẫu Nhà Mái Lệch Cấp 4/Nhà Mái Lệch (3).png",
+            "MauTK/Thiết Kế Mẫu Nhà Mái Lệch Cấp 4/Nhà Mái Lệch (4).png",
+            "MauTK/Thiết Kế Mẫu Nhà Mái Lệch Cấp 4/Nhà Mái Lệch (5).png"
+        ]
+    }
+};
+
+const galleriesNoiThat = {
     "galleryNVS": {
         title: "Thiết Kế NVS Hiện Đại 2025",
         images: [
@@ -66,7 +87,10 @@ const galleries = {
             "MauTK/Thiết Kế Cổng Nhà Đẹp 2025/Thiết Kế Cổng Nhà Đẹp 2025 4.png",
             "MauTK/Thiết Kế Cổng Nhà Đẹp 2025/Thiết Kế Cổng Nhà Đẹp 2025 5.png"
         ]
-    },
+    }
+};
+
+const galleriesShop = {
     "galleryShopTT": {
         title: "Thiết Kế Shop Thời Trang Đẹp",
         images: [
@@ -91,6 +115,15 @@ const galleries = {
             "MauTK/Thiết Kế Quán Cafe Sang Trọng/Thiết Kế Quán Cafe Sang Trọng 7.png",
             "MauTK/Thiết Kế Quán Cafe Sang Trọng/Thiết Kế Quán Cafe Sang Trọng 8.png"
         ]
+    },
+    "galleryQuanBar": {
+        title: "Thiết Kế Mẫu Quán Bar",
+        images: [
+            "MauTK/Thiết Kế Mẫu Quán Bar/Quán bar (2).png",
+            "MauTK/Thiết Kế Mẫu Quán Bar/Quán bar (4).png",
+            "MauTK/Thiết Kế Mẫu Quán Bar/Quán bar (6).png",
+            "MauTK/Thiết Kế Mẫu Quán Bar/Quán bar (8).png"
+        ]
     }
 };
 
@@ -108,6 +141,7 @@ const createGallery = (containerId, titleText, images) => {
         gallery.style.borderRadius = "10px";
         gallery.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.1)";
         gallery.style.backgroundColor = "#fff";
+
         document.body.appendChild(gallery); // Thêm vào cuối body
     }
 
@@ -117,41 +151,40 @@ const createGallery = (containerId, titleText, images) => {
     section.style.textAlign = "center";
     section.style.marginBottom = "30px";
 
-    // Tạo container cho ảnh và tiêu đề
+    // Tạo container cho ảnh
     const imageContainer = document.createElement("div");
-    imageContainer.style.position = "relative"; // Đặt vị trí tương đối để chứa tiêu đề
+    imageContainer.style.position = "relative";
     imageContainer.style.display = "inline-block";
-    imageContainer.style.width = "250px"; // Tăng kích thước container
-    imageContainer.style.height = "250px"; // Tăng kích thước container
+    imageContainer.style.width = "250px";
+    imageContainer.style.height = "250px";
 
     // Tạo ảnh mẫu
     const sampleImage = document.createElement("img");
-    sampleImage.src = images[0];
+    let currentIndex = Math.floor(Math.random() * images.length); // Chọn ngẫu nhiên một ảnh ban đầu
+    sampleImage.src = images[currentIndex];
     sampleImage.alt = "Sample Image";
-    sampleImage.style.width = "100%"; // Đặt ảnh chiếm toàn bộ container
-    sampleImage.style.height = "100%"; // Đặt ảnh chiếm toàn bộ container
+    sampleImage.style.width = "100%";
+    sampleImage.style.height = "100%";
     sampleImage.style.borderRadius = "10px";
-    sampleImage.style.objectFit = "cover"; // Đảm bảo ảnh không bị méo
+    sampleImage.style.objectFit = "cover";
     sampleImage.style.cursor = "pointer";
     sampleImage.style.transition = "transform 0.3s ease, box-shadow 0.3s ease";
     sampleImage.style.boxShadow = "0 2px 4px rgba(0, 0, 0, 0.1)";
     imageContainer.appendChild(sampleImage);
 
-    // Tạo tiêu đề trên ảnh, nằm phía dưới
+    // Tạo tiêu đề trên ảnh, góc dưới trái
     const sampleImageTitle = document.createElement("p");
     sampleImageTitle.innerText = titleText;
-    sampleImageTitle.style.position = "absolute"; // Đặt tiêu đề trên ảnh
-    sampleImageTitle.style.bottom = "0"; // Căn sát dưới ảnh
-    sampleImageTitle.style.left = "0"; // Căn sát trái
-    sampleImageTitle.style.width = "100%"; // Chiếm toàn bộ chiều ngang ảnh
-    sampleImageTitle.style.fontSize = "16px"; // Kích thước chữ
-    sampleImageTitle.style.fontWeight = "bold"; // In đậm chữ
-    sampleImageTitle.style.color = "#fff"; // Màu chữ trắng
-    sampleImageTitle.style.backgroundColor = "rgba(0, 0, 0, 0.6)"; // Nền mờ cho chữ
-    sampleImageTitle.style.padding = "10px 0"; // Thêm khoảng cách bên trong
-    sampleImageTitle.style.textAlign = "center"; // Căn giữa chữ
-    sampleImageTitle.style.borderBottomLeftRadius = "10px"; // Bo góc dưới trái
-    sampleImageTitle.style.borderBottomRightRadius = "10px"; // Bo góc dưới phải
+    sampleImageTitle.style.position = "absolute";
+    sampleImageTitle.style.bottom = "10px"; // Cách đáy ảnh 10px
+    sampleImageTitle.style.left = "10px"; // Cách trái ảnh 10px
+    sampleImageTitle.style.margin = "0";
+    sampleImageTitle.style.padding = "5px 10px";
+    sampleImageTitle.style.fontSize = "14px";
+    sampleImageTitle.style.fontWeight = "bold";
+    sampleImageTitle.style.color = "#fff";
+    sampleImageTitle.style.backgroundColor = "rgba(0, 0, 0, 0.6)";
+    sampleImageTitle.style.borderRadius = "5px";
     imageContainer.appendChild(sampleImageTitle);
 
     section.appendChild(imageContainer);
@@ -165,6 +198,12 @@ const createGallery = (containerId, titleText, images) => {
         sampleImage.style.transform = "scale(1)";
         sampleImage.style.boxShadow = "0 2px 4px rgba(0, 0, 0, 0.1)";
     });
+
+    // Đổi ảnh mẫu mỗi 5 giây
+    setInterval(() => {
+        currentIndex = (currentIndex + 1) % images.length; // Chuyển sang ảnh tiếp theo
+        sampleImage.src = images[currentIndex];
+    }, 5000);
 
     // Tạo popup khi nhấn vào ảnh mẫu
     sampleImage.addEventListener("click", () => {
@@ -217,12 +256,12 @@ const createGallery = (containerId, titleText, images) => {
             const img = document.createElement("img");
             img.dataset.src = name; // Sử dụng `data-src` cho lazy loading
             img.alt = name;
-            img.style.width = "200px"; // Tăng kích thước ảnh trong popup
-            img.style.height = "200px"; // Tăng kích thước ảnh trong popup
+            img.style.width = "200px";
+            img.style.height = "200px";
             img.style.borderRadius = "10px";
-            img.style.objectFit = "cover"; // Đảm bảo ảnh không bị méo
+            img.style.objectFit = "cover";
             img.style.boxShadow = "0 2px 4px rgba(0, 0, 0, 0.1)";
-            img.classList.add("lazy"); // Thêm class để xử lý lazy loading
+            img.classList.add("lazy");
             imageWrapper.appendChild(img);
 
             popupGallery.appendChild(imageWrapper);
@@ -243,7 +282,7 @@ const createGallery = (containerId, titleText, images) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const img = entry.target;
-                    img.src = img.dataset.src; // Gán `src` từ `data-src`
+                    img.src = img.dataset.src;
                     img.classList.remove("lazy");
                     observer.unobserve(img);
                 }
@@ -256,21 +295,20 @@ const createGallery = (containerId, titleText, images) => {
     gallery.appendChild(section);
 };
 
+// Hàm tạo tiêu đề chủ đề
+const createSectionTitle = (titleText) => {
+    const titleElement = document.createElement("h2");
+    titleElement.innerText = titleText;
+    titleElement.style.textAlign = "center";
+    titleElement.style.margin = "30px 0";
+    titleElement.style.fontSize = "24px";
+    titleElement.style.fontWeight = "bold";
+    titleElement.style.color = "#333";
+    return titleElement;
+};
+
 // Tự động tạo gallery cho tất cả phần tử trong danh sách
 document.addEventListener("DOMContentLoaded", () => {
-    // Tạo tiêu đề chính bên ngoài container
-    const titleContainer = document.createElement("div");
-    titleContainer.style.margin = "20px auto";
-    titleContainer.style.textAlign = "center";
-    titleContainer.style.fontSize = "28px"; // Kích thước chữ vừa phải
-    titleContainer.style.fontWeight = "bold"; // In đậm chữ
-    titleContainer.style.fontFamily = "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"; // Font chữ hiện đại
-    titleContainer.style.color = "#333"; // Màu chữ trung tính
-    titleContainer.innerText = "TỔNG HỢP MẪU THIẾT KẾ";
-
-    // Thêm tiêu đề vào body
-    document.body.appendChild(titleContainer);
-
     // Tạo container chính cho tất cả gallery
     const mainGalleryContainer = document.createElement("div");
     mainGalleryContainer.style.margin = "30px auto";
@@ -279,27 +317,43 @@ document.addEventListener("DOMContentLoaded", () => {
     mainGalleryContainer.style.borderRadius = "10px";
     mainGalleryContainer.style.backgroundColor = "#fff";
 
-    // Tạo gallery cho từng nhóm và thêm vào container chính
-    mainGalleryContainer.style.display = "flex";
-    mainGalleryContainer.style.flexWrap = "wrap";
-    mainGalleryContainer.style.gap = "20px";
-    mainGalleryContainer.style.justifyContent = "center";
+    // Thêm tiêu đề và gallery cho từng nhóm
+    const sections = [
+        { title: "Nhà Phố", galleries: galleriesNhaPho },
+        { title: "Nội Thất", galleries: galleriesNoiThat },
+        { title: "Shop và Cafe", galleries: galleriesShop }
+    ];
 
-    Object.keys(galleries).forEach(id => {
-        const { title, images } = galleries[id];
-        createGallery(id, title, images);
-        const gallerySection = document.getElementById(id);
+    sections.forEach(({ title, galleries }) => {
+        const sectionTitle = createSectionTitle(title);
+        mainGalleryContainer.appendChild(sectionTitle);
 
-        // Điều chỉnh kích thước và khoảng cách giữa các gallery
-        gallerySection.style.flex = "1 1 calc(25% - 20px)"; // Mỗi gallery chiếm 25% chiều rộng, trừ khoảng cách
-        gallerySection.style.boxSizing = "border-box";
-        gallerySection.style.margin = "0";
-        gallerySection.style.padding = "10px";
-        gallerySection.style.border = "1px solid #eee";
-        gallerySection.style.borderRadius = "8px";
-        gallerySection.style.backgroundColor = "#f9f9f9";
+        // Tạo container cho các gallery trong cùng một nhóm
+        const galleryRow = document.createElement("div");
+        galleryRow.style.display = "flex";
+        galleryRow.style.flexWrap = "wrap";
+        galleryRow.style.gap = "20px";
+        galleryRow.style.justifyContent = "center";
+        galleryRow.style.marginBottom = "30px";
 
-        mainGalleryContainer.appendChild(gallerySection);
+        Object.keys(galleries).forEach(id => {
+            const { title, images } = galleries[id];
+            createGallery(id, title, images);
+            const gallerySection = document.getElementById(id);
+
+            // Điều chỉnh kích thước và khoảng cách giữa các gallery
+            gallerySection.style.flex = "1 1 calc(25% - 20px)"; // Mỗi gallery chiếm 25% chiều rộng, trừ khoảng cách
+            gallerySection.style.boxSizing = "border-box";
+            gallerySection.style.margin = "0";
+            gallerySection.style.padding = "10px";
+            gallerySection.style.border = "1px solid #eee";
+            gallerySection.style.borderRadius = "8px";
+            gallerySection.style.backgroundColor = "#f9f9f9";
+
+            galleryRow.appendChild(gallerySection);
+        });
+
+        mainGalleryContainer.appendChild(galleryRow);
     });
 
     // Thêm container chính vào body
