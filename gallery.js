@@ -124,6 +124,22 @@ const galleriesShop = {
             "MauTK/Thiết Kế Mẫu Quán Bar/Quán bar (6).png",
             "MauTK/Thiết Kế Mẫu Quán Bar/Quán bar (8).png"
         ]
+    },
+    "galleryKaraoke": {
+        title: "Thiết Kế Quán Karaoke",
+        images: [
+            "MauTK/Thiết Kế Quán Karaok/Karaok (1).png",
+            "MauTK/Thiết Kế Quán Karaok/Karaok (2).png"
+        ]
+    },
+    "galleryNhaHang": {
+        title: "Thiết Kế Mẫu Nhà Hàng",
+        images: [
+            "MauTK/Thiết Kế Mẫu Nhà Hàng/Nhà Hàng (1).png",
+            "MauTK/Thiết Kế Mẫu Nhà Hàng/Nhà Hàng (2).png",
+            "MauTK/Thiết Kế Mẫu Nhà Hàng/Nhà Hàng (3).png",
+            "MauTK/Thiết Kế Mẫu Nhà Hàng/Nhà Hàng (4).png"
+        ]
     }
 };
 
