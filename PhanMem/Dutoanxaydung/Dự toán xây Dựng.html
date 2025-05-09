@@ -31,6 +31,7 @@
 </head>
 <body>
     <button id="historyBtn">Lịch sử</button> <!-- Nút Lịch sử -->
+    <button id="settingsBtn">Cài Đặt</button> <!-- Nút Cài Đặt -->
     <div class="container">
         <h1>Dự Toán Nhanh Chi Phí Xây Dựng Nhà</h1>
         <form id="estimateForm">
@@ -76,6 +77,28 @@
             <div id="estimatedCost"></div>
             <div id="materialEstimates"></div>
         </div>
+    </div>
+    <div id="settingsPopup">
+        <h2>Cài Đặt</h2>
+        <label for="costPerSquareMeter">Đơn Giá (VND/m²):</label>
+        <input type="number" id="costPerSquareMeter" value="6000000" required>
+
+        <label for="roofFactors">Hệ Số % Loại Mái:</label>
+        <textarea id="roofFactors" rows="3" required>
+Mái Ngói:30
+Mái Bê Tông:50
+Mái Tôn:15
+        </textarea>
+
+        <label for="foundationFactors">Hệ Số % Loại Móng:</label>
+        <textarea id="foundationFactors" rows="3" required>
+Móng Đơn:30
+Móng Băng:50
+Móng Cọc:70
+        </textarea>
+
+        <button type="button" id="saveSettingsBtn">Lưu Cài Đặt</button>
+        <button type="button" id="closeSettingsPopup">Đóng</button>
     </div>
     <div id="historyPopup">
         <h2>Lịch Sử Đã Tính</h2>

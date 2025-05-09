@@ -40,7 +40,7 @@ document.getElementById('calculateBtn').addEventListener('click', () => {
                 return;
             }
 
-            const costPerSquareMeter = 6000000; // 6 triệu/m²
+            const costPerSquareMeter = parseFloat(localStorage.getItem('costPerSquareMeter')) || 6000000; // Default to 6 triệu/m² if not set
             const baseArea = length * width;
             const foundationArea = baseArea * foundationFactor;
             const roofArea = baseArea * roofFactor;
@@ -345,6 +345,99 @@ document.getElementById('exportExcelBtn').addEventListener('click', () => {
     XLSX.writeFile(workbook, fileName);
 });
 
+document.getElementById('saveSettingsBtn').addEventListener('click', () => {
+    const costPerSquareMeter = parseFloat(document.getElementById('costPerSquareMeter').value);
+    const roofFactors = document.getElementById('roofFactors').value.trim();
+    const foundationFactors = document.getElementById('foundationFactors').value.trim();
+
+    if (isNaN(costPerSquareMeter) || costPerSquareMeter <= 0) {
+        alert('Vui lòng nhập đơn giá hợp lệ!');
+        return;
+    }
+
+    const roofFactorMap = parseFactors(roofFactors);
+    const foundationFactorMap = parseFactors(foundationFactors);
+
+    if (!roofFactorMap || !foundationFactorMap) {
+        alert('Vui lòng nhập hệ số % hợp lệ!');
+        return;
+    }
+
+    // Save settings to localStorage
+    localStorage.setItem('costPerSquareMeter', costPerSquareMeter);
+    localStorage.setItem('roofFactors', JSON.stringify(roofFactorMap));
+    localStorage.setItem('foundationFactors', JSON.stringify(foundationFactorMap));
+
+    // Apply settings immediately
+    updateDropdowns(roofFactorMap, foundationFactorMap);
+
+    alert('Cài đặt đã được lưu và áp dụng!');
+});
+
+function parseFactors(input) {
+    const lines = input.split('\n');
+    const factorMap = {};
+    for (const line of lines) {
+        const [name, value] = line.split(':').map((item) => item.trim());
+        if (!name || isNaN(value)) {
+            return null;
+        }
+        factorMap[name] = parseFloat(value);
+    }
+    return factorMap;
+}
+
+function updateDropdowns(roofFactorMap, foundationFactorMap) {
+    const roofSelect = document.getElementById('roof');
+    const foundationSelect = document.getElementById('foundation');
+
+    roofSelect.innerHTML = '';
+    foundationSelect.innerHTML = '';
+
+    for (const [name, value] of Object.entries(roofFactorMap)) {
+        const option = document.createElement('option');
+        option.value = value;
+        option.textContent = `${name} (${value}%)`;
+        roofSelect.appendChild(option);
+    }
+
+    for (const [name, value] of Object.entries(foundationFactorMap)) {
+        const option = document.createElement('option');
+        option.value = value;
+        option.textContent = `${name} (${value}%)`;
+        foundationSelect.appendChild(option);
+    }
+}
+
+// Apply saved settings on page load
+document.addEventListener('DOMContentLoaded', () => {
+    const savedCost = localStorage.getItem('costPerSquareMeter');
+    const savedRoofFactors = localStorage.getItem('roofFactors');
+    const savedFoundationFactors = localStorage.getItem('foundationFactors');
+
+    if (savedCost) {
+        document.getElementById('costPerSquareMeter').value = savedCost;
+    }
+
+    if (savedRoofFactors) {
+        document.getElementById('roofFactors').value = Object.entries(JSON.parse(savedRoofFactors))
+            .map(([name, value]) => `${name}:${value}`)
+            .join('\n');
+    }
+
+    if (savedFoundationFactors) {
+        document.getElementById('foundationFactors').value = Object.entries(JSON.parse(savedFoundationFactors))
+            .map(([name, value]) => `${name}:${value}`)
+            .join('\n');
+    }
+
+    if (savedRoofFactors && savedFoundationFactors) {
+        const roofFactorMap = JSON.parse(savedRoofFactors);
+        const foundationFactorMap = JSON.parse(savedFoundationFactors);
+        updateDropdowns(roofFactorMap, foundationFactorMap);
+    }
+});
+
 function saveToHistory(projectName, data) {
     const history = JSON.parse(localStorage.getItem('calculationHistory')) || [];
     const timestamp = new Date().toLocaleString();
@@ -469,3 +562,101 @@ const makePopupDraggable = (popup) => {
 
 // Apply draggable functionality to the history popup
 makePopupDraggable(historyPopup);
+
+// Hiển thị và đóng popup Cài Đặt
+const settingsBtn = document.getElementById('settingsBtn');
+const settingsPopup = document.getElementById('settingsPopup');
+const closeSettingsPopup = document.getElementById('closeSettingsPopup');
+
+settingsBtn.addEventListener('click', () => {
+    settingsPopup.style.display = 'block';
+});
+
+closeSettingsPopup.addEventListener('click', () => {
+    settingsPopup.style.display = 'none';
+});
+
+// Apply styles to tables for better appearance
+document.querySelectorAll('table').forEach((table) => {
+    table.style.border = '1px solid #ddd';
+    table.style.borderCollapse = 'collapse';
+    table.style.width = '100%';
+    table.style.marginTop = '20px';
+});
+
+document.querySelectorAll('table th, table td').forEach((cell) => {
+    cell.style.border = '1px solid #ddd';
+    cell.style.padding = '10px';
+    cell.style.textAlign = 'center';
+});
+
+document.querySelectorAll('table th').forEach((header) => {
+    header.style.backgroundColor = '#4CAF50';
+    header.style.color = 'white';
+    header.style.fontWeight = 'bold';
+});
+
+// Style buttons for a modern look
+document.querySelectorAll('button').forEach((button) => {
+    button.style.backgroundColor = '#4CAF50';
+    button.style.color = 'white';
+    button.style.border = 'none';
+    button.style.padding = '10px 20px';
+    button.style.margin = '5px';
+    button.style.cursor = 'pointer';
+    button.style.borderRadius = '5px';
+    button.style.fontSize = '14px';
+});
+
+document.querySelectorAll('button').forEach((button) => {
+    button.addEventListener('mouseover', () => {
+        button.style.backgroundColor = '#45a049';
+    });
+    button.addEventListener('mouseout', () => {
+        button.style.backgroundColor = '#4CAF50';
+    });
+});
+
+// Style popups for better aesthetics
+const popups = document.querySelectorAll('.popup');
+popups.forEach((popup) => {
+    popup.style.backgroundColor = '#f9f9f9';
+    popup.style.border = '1px solid #ddd';
+    popup.style.borderRadius = '10px';
+    popup.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)';
+    popup.style.padding = '20px';
+    popup.style.width = '80%';
+    popup.style.maxWidth = '600px';
+    popup.style.margin = 'auto';
+    popup.style.position = 'fixed';
+    popup.style.top = '50%';
+    popup.style.left = '50%';
+    popup.style.transform = 'translate(-50%, -50%)';
+    popup.style.zIndex = '1000';
+});
+
+// Style popup close buttons
+document.querySelectorAll('.popup .close').forEach((closeButton) => {
+    closeButton.style.position = 'absolute';
+    closeButton.style.top = '10px';
+    closeButton.style.right = '10px';
+    closeButton.style.backgroundColor = '#ff5c5c';
+    closeButton.style.color = 'white';
+    closeButton.style.border = 'none';
+    closeButton.style.borderRadius = '50%';
+    closeButton.style.width = '30px';
+    closeButton.style.height = '30px';
+    closeButton.style.cursor = 'pointer';
+    closeButton.style.textAlign = 'center';
+    closeButton.style.lineHeight = '30px';
+    closeButton.style.fontSize = '16px';
+});
+
+document.querySelectorAll('.popup .close').forEach((closeButton) => {
+    closeButton.addEventListener('mouseover', () => {
+        closeButton.style.backgroundColor = '#ff3333';
+    });
+    closeButton.addEventListener('mouseout', () => {
+        closeButton.style.backgroundColor = '#ff5c5c';
+    });
+});
